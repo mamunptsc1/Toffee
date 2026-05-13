@@ -1,0 +1,86 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>BD LIVE TV</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <style>
+
+    body{
+      margin:0;
+      background:#0f0f0f;
+      font-family:sans-serif;
+      color:white;
+    }
+
+    h1{
+      text-align:center;
+      padding:15px;
+      background:#161616;
+      margin:0;
+    }
+
+    #video{
+      width:100%;
+      height:220px;
+      background:black;
+    }
+
+    #channels{
+      padding:10px;
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+      gap:10px;
+    }
+
+    .channel{
+      background:#1c1c1c;
+      border-radius:12px;
+      padding:10px;
+      cursor:pointer;
+      transition:.3s;
+      text-align:center;
+    }
+
+    .channel:hover{
+      background:#292929;
+    }
+
+    .channel img{
+      width:100%;
+      height:90px;
+      object-fit:cover;
+      border-radius:10px;
+    }
+
+    .channel p{
+      margin-top:8px;
+      font-size:14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<h1>BD LIVE TV</h1>
+
+<video id="video" controls autoplay></video>
+
+<div id="channels"></div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
