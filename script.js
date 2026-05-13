@@ -10,60 +10,62 @@ fetch("https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Play
 
 .then(data => {
 
-  const channels = data.response;
+    const channels = data.response;
 
-  channels.forEach(channel => {
+    channels.forEach(channel => {
 
-    const div = document.createElement("div");
+        const div = document.createElement("div");
 
-    div.className = "channel";
+        div.className = "channel";
 
-    div.innerHTML = `
+        div.innerHTML = `
 
-      <img src="${channel.logo}" alt="logo">
+            <img src="${channel.logo}" alt="logo">
 
-      <p>${channel.name}</p>
+            <p>${channel.name}</p>
 
-    `;
+        `;
 
-    div.onclick = () => {
+        div.onclick = () => {
 
-      if (Hls.isSupported()) {
+            const streamUrl = '/api/proxy?url=' + encodeURIComponent(channel.link);
 
-        const hls = new Hls();
+            if (Hls.isSupported()) {
 
-        hls.loadSource(channel.link);
+                const hls = new Hls();
 
-        hls.attachMedia(video);
+                hls.loadSource(streamUrl);
 
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                hls.attachMedia(video);
 
-          video.play();
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
 
-        });
+                    video.play();
 
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                });
 
-        video.src = "/api/proxy?url=" + encodeURIComponent(channel.link);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 
-        video.addEventListener('loadedmetadata', function () {
+                video.src = streamUrl;
 
-          video.play();
+                video.addEventListener('loadedmetadata', function () {
 
-        });
+                    video.play();
 
-      }
+                });
 
-    };
+            }
 
-    channelsDiv.appendChild(div);
+        };
 
-  });
+        channelsDiv.appendChild(div);
+
+    });
 
 })
 
 .catch(error => {
 
-  console.log(error);
+    console.log(error);
 
 });
