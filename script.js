@@ -44,7 +44,7 @@ fetch("https://raw.githubusercontent.com/sm-monirulislam/Toffee-Auto-Update-Play
 
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 
-        video.src = channel.link;
+        video.src = "/api/proxy?url=" + encodeURIComponent(channel.link);
 
         video.addEventListener('loadedmetadata', function () {
 
