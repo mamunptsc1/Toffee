@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+
   const url = req.query.url;
 
   if (!url) {
@@ -6,11 +7,13 @@ export default async function handler(req, res) {
   }
 
   try {
+
     const response = await fetch(url, {
       headers: {
-        "user-agent":
-          "Mozilla/5.0 (Linux; Android 14; SM-A515F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
-      },
+        "user-agent": "Mozilla/5.0",
+        "referer": "https://toffeelive.com/",
+        "origin": "https://toffeelive.com"
+      }
     });
 
     const data = await response.text();
@@ -21,6 +24,9 @@ export default async function handler(req, res) {
     return res.status(200).send(data);
 
   } catch (error) {
+
     return res.status(500).send("Proxy Error");
+
   }
+
 }
